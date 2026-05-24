@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Abhishek Kumar — iOS Engineer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#2997ff;
+  --green:#30d158;
+  --orange:#ff9f0a;
+  --pink:#ff375f;
+  --purple:#bf5af2;
+  --teal:#5ac8fa;
+  --text:#f5f5f7;
+  --sub:#a1a1a6;
+  --dim:#6e6e73;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  background:#000;color:var(--text);overflow-x:hidden;
+}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:#000;}
+::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:3px;}
+
+/* ══ BACKGROUND ══ */
+.scene{position:fixed;inset:0;z-index:0;background:#030308;overflow:hidden;}
+.scene::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.016) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.016) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);animation:bf 16s ease-in-out infinite;}
+.b1{width:700px;height:700px;top:-150px;left:-180px;background:radial-gradient(circle,rgba(41,151,255,.28),transparent 70%);animation-delay:0s;}
+.b2{width:550px;height:550px;top:20%;right:-100px;background:radial-gradient(circle,rgba(191,90,242,.2),transparent 70%);animation-delay:-5s;}
+.b3{width:650px;height:400px;bottom:-80px;left:10%;background:radial-gradient(circle,rgba(0,180,130,.14),transparent 70%);animation-delay:-10s;}
+.b4{width:400px;height:400px;top:50%;left:-80px;background:radial-gradient(circle,rgba(255,55,95,.12),transparent 70%);animation-delay:-3s;}
+.b5{width:350px;height:350px;bottom:20%;right:5%;background:radial-gradient(circle,rgba(255,159,10,.12),transparent 70%);animation-delay:-7s;}
+@keyframes bf{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(28px,-38px) scale(1.04);}66%{transform:translate(-20px,24px) scale(.97);}}
+
+/* ══ GLASS ══ */
+.g{
+  background:rgba(255,255,255,0.065);
+  backdrop-filter:blur(44px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter:blur(44px) saturate(180%) brightness(1.08);
+  border:1px solid rgba(255,255,255,0.13);
+  border-top-color:rgba(255,255,255,0.28);
+  box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.13);
+  position:relative;overflow:hidden;
+}
+.g::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.38) 40%,rgba(255,255,255,.6) 50%,rgba(255,255,255,.38) 60%,transparent);
+  z-index:2;pointer-events:none;
+}
+
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;height:52px;
+  display:flex;align-items:center;padding:0 2.5rem;
+}
+.nav-glass{
+  position:absolute;inset:0;
+  background:rgba(3,3,10,.68);
+  backdrop-filter:blur(30px) saturate(200%);
+  -webkit-backdrop-filter:blur(30px) saturate(200%);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  transition:background .3s;
+}
+.nav-inner{position:relative;z-index:1;width:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-name{font-size:15px;font-weight:600;letter-spacing:-.02em;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:13px;color:var(--sub);transition:color .2s;text-decoration:none;}
+.nav-links a:hover{color:var(--text);}
+.nav-role{
+  font-size:12px;color:var(--sub);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-top-color:rgba(255,255,255,.2);
+  backdrop-filter:blur(10px);
+  border-radius:980px;padding:.3rem .9rem;
+  font-weight:500;
+}
+
+/* ══ HERO ══ */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:110px 2rem 5rem;
+  position:relative;z-index:1;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:.38rem 1.1rem;border-radius:980px;margin-bottom:2rem;
+  font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--sub);
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.11);
+  border-top-color:rgba(255,255,255,.22);
+  position:relative;overflow:hidden;
+}
+.hero-eyebrow::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3) 50%,transparent);}
+.co-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--orange);
+  box-shadow:0 0 8px rgba(255,159,10,.9);
+  animation:blink 2.5s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{box-shadow:0 0 5px rgba(255,159,10,.5);}50%{box-shadow:0 0 16px rgba(255,159,10,1);}}
+
+h1.htitle{
+  font-size:clamp(2.6rem,7vw,5.8rem);
+  font-weight:700;letter-spacing:-.05em;line-height:1.02;margin-bottom:1.4rem;
+}
+.grad-w{color:var(--text);}
+.grad-b{
+  background:linear-gradient(135deg,#a8d4ff 0%,#2997ff 60%,#a78bfa 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:clamp(.95rem,1.8vw,1.18rem);font-weight:300;
+  color:var(--sub);line-height:1.75;max-width:580px;margin:0 auto 3rem;
+}
+.hero-sub strong{color:var(--text);font-weight:500;}
+.hbtns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem;}
+.btn-ghost{
+  border-radius:980px;padding:.68rem 1.8rem;font-size:14px;font-weight:500;
+  font-family:inherit;cursor:pointer;color:var(--text);transition:all .22s;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.16);border-top-color:rgba(255,255,255,.3);
+  text-decoration:none;display:inline-block;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.13);transform:translateY(-2px);}
+.btn-b{
+  background:var(--blue);color:#fff;border:none;border-radius:980px;
+  padding:.68rem 1.8rem;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;
+  box-shadow:0 4px 24px rgba(41,151,255,.38);transition:all .22s;
+  text-decoration:none;display:inline-block;
+}
+.btn-b:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(41,151,255,.55);}
+
+/* Floating skill chips */
+.float-pills{display:flex;gap:.65rem;justify-content:center;flex-wrap:wrap;max-width:600px;}
+.fp{
+  padding:.48rem 1rem;border-radius:12px;
+  display:flex;align-items:center;gap:.4rem;
+  font-size:12px;font-weight:500;
+  background:rgba(255,255,255,.065);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.12);border-top-color:rgba(255,255,255,.26);
+  box-shadow:0 6px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.11);
+  transition:transform .2s,box-shadow .2s;cursor:default;position:relative;overflow:hidden;
+}
+.fp::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25) 50%,transparent);}
+.fp:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4);}
+
+/* ══ STATS ══ */
+.stats-wrap{position:relative;z-index:1;padding:0 2rem;max-width:900px;margin:0 auto 7rem;}
+.stats-g{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-radius:22px;overflow:hidden;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(50px) saturate(190%);
+  -webkit-backdrop-filter:blur(50px) saturate(190%);
+  border:1px solid rgba(255,255,255,.1);border-top-color:rgba(255,255,255,.22);
+  box-shadow:0 24px 64px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.11);
+  position:relative;
+}
+.stats-g::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28) 30%,rgba(255,255,255,.5) 50%,rgba(255,255,255,.28) 70%,transparent);}
+.sc{padding:2rem 1.5rem;text-align:center;border-right:1px solid rgba(255,255,255,.07);transition:background .2s;}
+.sc:last-child{border-right:none;}
+.sc:hover{background:rgba(255,255,255,.03);}
+.sn{
+  font-size:2.2rem;font-weight:700;letter-spacing:-.04em;
+  background:linear-gradient(135deg,#f5f5f7,#8a8a8f);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sl{font-size:11.5px;color:var(--dim);margin-top:.3rem;letter-spacing:.03em;}
+
+/* ══ SECTION ══ */
+.sec{padding:7rem 2rem;position:relative;z-index:1;}
+.inn{max-width:960px;margin:0 auto;}
+.ey{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:.7rem;}
+.st{font-size:clamp(1.8rem,4vw,2.9rem);font-weight:700;letter-spacing:-.04em;line-height:1.08;margin-bottom:1.2rem;}
+.sb{font-size:15.5px;font-weight:300;color:var(--sub);line-height:1.78;max-width:560px;}
+
+/* ══ FEATURED PROJECT — BEATO ══ */
+.featured-wrap{margin-top:3rem;}
+.featured-card{
+  border-radius:28px;overflow:hidden;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(50px) saturate(190%);
+  -webkit-backdrop-filter:blur(50px) saturate(190%);
+  border:1px solid rgba(255,255,255,.12);border-top-color:rgba(255,255,255,.26);
+  box-shadow:0 24px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.13);
+  position:relative;overflow:hidden;
+}
+.featured-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.32) 30%,rgba(255,255,255,.58) 50%,rgba(255,255,255,.32) 70%,transparent);z-index:3;}
+.fc-top{
+  padding:3rem 3rem 2.5rem;
+  background:linear-gradient(135deg,rgba(41,100,255,.22) 0%,rgba(90,200,250,.1) 40%,rgba(191,90,242,.12) 100%);
+  display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  position:relative;overflow:hidden;
+}
+.fc-top::after{
+  content:'';position:absolute;bottom:-60px;right:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(41,151,255,.1),transparent 70%);
+  pointer-events:none;
+}
+.fc-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(41,151,255,.12);border:1px solid rgba(41,151,255,.28);
+  border-radius:980px;padding:.28rem .8rem;
+  font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:1.2rem;
+}
+.fc-title{font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-.04em;margin-bottom:.7rem;line-height:1.1;}
+.fc-sub{font-size:14.5px;color:var(--sub);line-height:1.75;max-width:480px;margin-bottom:1.5rem;font-weight:300;}
+.fc-metrics{display:flex;gap:2rem;flex-wrap:wrap;}
+.fcm{text-align:left;}
+.fcm-n{font-size:1.6rem;font-weight:700;letter-spacing:-.04em;color:var(--text);}
+.fcm-l{font-size:11px;color:var(--dim);letter-spacing:.03em;margin-top:1px;}
+.fc-app-icon{
+  width:90px;height:90px;border-radius:22px;
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  border:1px solid rgba(255,255,255,.15);border-top-color:rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;flex-shrink:0;
+  box-shadow:0 8px 32px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12);
+}
+.fc-bottom{padding:2.5rem 3rem;}
+.fc-features{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.fcf{
+  padding:1.3rem;border-radius:16px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08);border-top-color:rgba(255,255,255,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+  position:relative;overflow:hidden;
+  transition:background .2s,transform .2s;cursor:default;
+}
+.fcf::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18) 50%,transparent);}
+.fcf:hover{background:rgba(255,255,255,.07);transform:translateY(-3px);}
+.fcf-icon{font-size:1.3rem;margin-bottom:.6rem;display:block;}
+.fcf-title{font-size:13px;font-weight:600;letter-spacing:-.01em;margin-bottom:.3rem;}
+.fcf-desc{font-size:12px;color:var(--sub);line-height:1.6;}
+.fc-chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.06);}
+.chip{
+  padding:.22rem .65rem;border-radius:6px;font-size:11.5px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  color:var(--sub);font-weight:500;
+}
+
+/* ══ PROJECT CARDS GRID ══ */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:2.5rem;}
+.pc{
+  border-radius:22px;overflow:hidden;position:relative;
+  background:rgba(255,255,255,.055);
+  backdrop-filter:blur(44px) saturate(180%);
+  -webkit-backdrop-filter:blur(44px) saturate(180%);
+  border:1px solid rgba(255,255,255,.1);border-top-color:rgba(255,255,255,.22);
+  box-shadow:0 10px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.11);
+  transition:transform .32s cubic-bezier(.25,.46,.45,.94),box-shadow .32s;
+  cursor:default;
+}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3) 40%,rgba(255,255,255,.5) 50%,rgba(255,255,255,.3) 60%,transparent);z-index:2;}
+.pc:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 28px 70px rgba(0,0,0,.6);}
+.ph{height:155px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden;}
+.ph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:35px;background:linear-gradient(to bottom,transparent,rgba(0,0,0,.22));}
+.c1{background:linear-gradient(135deg,rgba(255,159,10,.35),rgba(255,60,10,.28));}
+.c2{background:linear-gradient(135deg,rgba(41,100,255,.4),rgba(100,40,200,.32));}
+.c3{background:linear-gradient(135deg,rgba(0,180,120,.32),rgba(0,100,200,.28));}
+.c4{background:linear-gradient(135deg,rgba(255,60,100,.32),rgba(180,40,255,.28));}
+.c5{background:linear-gradient(135deg,rgba(90,200,250,.28),rgba(41,151,255,.32));}
+.c6{background:linear-gradient(135deg,rgba(48,209,88,.28),rgba(0,150,100,.32));}
+.pb2{padding:1.4rem;}
+.pt2{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:.3rem;}
+.pn2{font-size:17px;font-weight:600;letter-spacing:-.02em;margin-bottom:.4rem;}
+.pd2{font-size:13px;color:var(--sub);line-height:1.65;margin-bottom:.9rem;}
+.pchips{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.8rem;}
+.pst{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:500;padding:.2rem .6rem;border-radius:980px;
+}
+.live{background:rgba(48,209,88,.1);border:1px solid rgba(48,209,88,.22);color:var(--green);}
+.dev{background:rgba(255,159,10,.08);border:1px solid rgba(255,159,10,.2);color:var(--orange);}
+.std{width:5px;height:5px;border-radius:50%;}
+
+/* ══ JOURNEY TIMELINE ══ */
+.journey{margin-top:3.5rem;position:relative;}
+.journey::before{
+  content:'';position:absolute;left:28px;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,rgba(41,151,255,.5),rgba(255,255,255,.05));
+}
+.jitem{
+  display:grid;grid-template-columns:56px 1fr;gap:1.5rem;
+  margin-bottom:1rem;position:relative;
+}
+.jdot-wrap{display:flex;flex-direction:column;align-items:center;padding-top:.3rem;}
+.jdot{
+  width:14px;height:14px;border-radius:50%;flex-shrink:0;
+  border:2px solid rgba(255,255,255,.15);
+  position:relative;z-index:1;
+}
+.jdot.active{
+  background:var(--orange);border-color:var(--orange);
+  box-shadow:0 0 0 4px rgba(255,159,10,.18),0 0 16px rgba(255,159,10,.5);
+}
+.jdot.past{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.1);}
+.jcard{
+  padding:1.8rem;border-radius:20px;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(36px) saturate(170%);
+  -webkit-backdrop-filter:blur(36px) saturate(170%);
+  border:1px solid rgba(255,255,255,.09);border-top-color:rgba(255,255,255,.2);
+  box-shadow:0 4px 20px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);
+  position:relative;overflow:hidden;
+  transition:background .22s,transform .22s;cursor:default;
+}
+.jcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2) 50%,transparent);}
+.jcard:hover{background:rgba(255,255,255,.08);transform:translateX(5px);}
+.jcard.current{
+  border-color:rgba(255,159,10,.2);border-top-color:rgba(255,159,10,.38);
+  background:rgba(255,159,10,.04);
+}
+.jcard.current::before{background:linear-gradient(90deg,transparent,rgba(255,159,10,.35) 40%,rgba(255,159,10,.55) 50%,rgba(255,159,10,.35) 60%,transparent);}
+.j-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.8rem;flex-wrap:wrap;}
+.j-co-wrap{display:flex;align-items:center;gap:.8rem;}
+.j-logo{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);border-top-color:rgba(255,255,255,.22);
+  flex-shrink:0;
+}
+.j-role{font-size:15px;font-weight:600;letter-spacing:-.02em;}
+.j-co{font-size:13px;font-weight:500;margin-top:1px;}
+.j-date{
+  font-size:11px;color:var(--dim);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:980px;padding:.2rem .7rem;white-space:nowrap;flex-shrink:0;
+}
+.current-badge{
+  font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  background:rgba(255,159,10,.1);border:1px solid rgba(255,159,10,.25);
+  color:var(--orange);border-radius:980px;padding:.2rem .7rem;
+}
+.j-desc{font-size:13px;color:var(--sub);line-height:1.75;margin-bottom:1rem;}
+.j-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+.jtag{
+  padding:.2rem .65rem;border-radius:980px;font-size:11px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  color:var(--dim);font-weight:500;transition:all .18s;cursor:default;
+}
+.jtag:hover{color:var(--blue);border-color:rgba(41,151,255,.3);background:rgba(41,151,255,.07);}
+
+/* ══ SKILLS BENTO ══ */
+.sbento{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:2.5rem;}
+.sbc{
+  padding:1.6rem;border-radius:18px;position:relative;overflow:hidden;
+  background:rgba(255,255,255,.055);
+  backdrop-filter:blur(36px) saturate(160%);
+  -webkit-backdrop-filter:blur(36px) saturate(160%);
+  border:1px solid rgba(255,255,255,.09);border-top-color:rgba(255,255,255,.2);
+  box-shadow:0 6px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.09);
+  transition:transform .25s,box-shadow .25s;cursor:default;
+}
+.sbc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22) 50%,transparent);}
+.sbc:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.42);}
+.sbc.wide{grid-column:span 2;}
+.sbc-icon{font-size:1.6rem;margin-bottom:.8rem;display:block;filter:drop-shadow(0 0 8px rgba(41,151,255,.25));}
+.sbc-title{font-size:14px;font-weight:600;letter-spacing:-.01em;margin-bottom:.35rem;}
+.sbc-sub{font-size:12.5px;color:var(--sub);line-height:1.65;}
+.stags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.8rem;}
+
+/* ══ CONTACT ══ */
+.cbox{
+  max-width:660px;margin:3rem auto 0;padding:3.2rem;border-radius:30px;
+  text-align:center;position:relative;overflow:hidden;
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(70px) saturate(200%) brightness(1.08);
+  -webkit-backdrop-filter:blur(70px) saturate(200%) brightness(1.08);
+  border:1px solid rgba(255,255,255,.16);border-top-color:rgba(255,255,255,.36);
+  box-shadow:0 36px 90px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(255,255,255,.04);
+}
+.cbox::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4) 30%,rgba(255,255,255,.65) 50%,rgba(255,255,255,.4) 70%,transparent);}
+.cshine{position:absolute;top:0;bottom:0;left:-80%;width:45%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.045),transparent);transform:skewX(-18deg);animation:sw 8s ease-in-out infinite;}
+@keyframes sw{0%,100%{left:-80%;}50%{left:130%;}}
+.cglow{position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:320px;height:160px;border-radius:50%;background:radial-gradient(ellipse,rgba(41,151,255,.09),transparent 70%);pointer-events:none;}
+.cn{font-size:14px;color:var(--dim);margin-bottom:1.4rem;position:relative;z-index:1;}
+.ce{
+  display:block;position:relative;z-index:1;
+  font-size:clamp(1rem,2.5vw,1.6rem);font-weight:600;letter-spacing:-.03em;
+  color:var(--blue);margin-bottom:.4rem;transition:opacity .2s;text-decoration:none;
+}
+.ce:hover{opacity:.7;}
+.cph{display:block;position:relative;z-index:1;font-size:13px;color:var(--sub);margin-bottom:1.8rem;}
+.csocs{display:flex;justify-content:center;gap:.55rem;flex-wrap:wrap;position:relative;z-index:1;}
+.csoc{
+  padding:.42rem 1.1rem;border-radius:980px;font-size:13px;font-weight:500;
+  font-family:inherit;cursor:pointer;color:var(--sub);transition:all .2s;
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.1);border-top-color:rgba(255,255,255,.2);
+  text-decoration:none;display:inline-block;
+}
+.csoc:hover{background:rgba(255,255,255,.13);color:var(--text);transform:translateY(-2px);}
+
+/* ══ FOOTER ══ */
+footer{
+  position:relative;z-index:1;padding:1.4rem 2.5rem;
+  background:rgba(0,0,0,.65);backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.fcopy{font-size:12px;color:var(--dim);}
+
+/* ══ SCROLL REVEAL ══ */
+.r{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
+.r.on{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-glass" id="ng"></div>
+  <div class="nav-inner">
+    <span class="nav-name">Abhishek Kumar</span>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <span class="nav-role">iOS Engineer · OrangeMantra</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow r">
+    <span class="co-dot"></span>
+    Currently building · BeatO at OrangeMantra
+  </div>
+  <h1 class="htitle r d1">
+    <span class="grad-w">I build apps</span><br/>
+    <span class="grad-b">people rely on.</span>
+  </h1>
+  <p class="hero-sub r d2">
+    iOS Engineer with <strong>3.6+ years</strong> of shipping native Swift apps —
+    from healthcare platforms used by thousands, to on-demand services, eCommerce,
+    and telemedicine. Every pixel. Every API. Every release.
+  </p>
+  <div class="hbtns r d3">
+    <a href="#work" class="btn-b">See My Work</a>
+    <a href="#journey" class="btn-ghost">My Journey</a>
+  </div>
+  <div class="float-pills r d4">
+    <div class="fp">📱 UIKit</div>
+    <div class="fp">⚡ Swift</div>
+    <div class="fp">🔥 Firebase</div>
+    <div class="fp">📡 BLE</div>
+    <div class="fp">🗺 Google Maps</div>
+    <div class="fp">🎬 AVKit</div>
+    <div class="fp">💾 Realm</div>
+    <div class="fp">🎨 Adobe XD</div>
+    <div class="fp">🎨 Figma</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-wrap r">
+  <div class="stats-g">
+    <div class="sc"><div class="sn" data-t="3.6" data-s="+ yrs" data-d="1">0</div><div class="sl">Experience</div></div>
+    <div class="sc"><div class="sn" data-t="16" data-s="+">0</div><div class="sl">Apps Built</div></div>
+    <div class="sc"><div class="sn" data-t="8" data-s=" Live">0</div><div class="sl">On App Store</div></div>
+    <div class="sc"><div class="sn" data-t="2">0</div><div class="sl">Companies</div></div>
+  </div>
+</div>
+
+<!-- FEATURED — BEATO -->
+<section class="sec" id="work">
+  <div class="inn">
+    <p class="ey r">Currently working on</p>
+    <h2 class="st r d1">Featured project.</h2>
+    <p class="sb r d2">The app I'm actively building right now — a production healthcare platform at scale.</p>
+
+    <div class="featured-wrap r d3">
+      <div class="featured-card">
+        <div class="fc-top">
+          <div>
+            <div class="fc-badge">🩺 Healthcare · Active</div>
+            <h3 class="fc-title">BeatO & MyDoc Apps</h3>
+            <p class="fc-sub">India's leading digital diabetes management platform. Helping patients track blood glucose, access AI-driven health insights, and connect with doctors — all from their iPhone.</p>
+            <div class="fc-metrics">
+              <div class="fcm"><div class="fcm-n">Millions</div><div class="fcm-l">Users on Platform</div></div>
+              <div class="fcm"><div class="fcm-n">Real-time</div><div class="fcm-l">BLE Glucose Sync</div></div>
+              <div class="fcm"><div class="fcm-n">Multi-variant</div><div class="fcm-l">Build Configuration</div></div>
+            </div>
+          </div>
+          <div class="fc-app-icon">🩺</div>
+        </div>
+        <div class="fc-bottom">
+          <div class="fc-features">
+            <div class="fcf">
+              <span class="fcf-icon">📡</span>
+              <div class="fcf-title">BLE Integration</div>
+              <div class="fcf-desc">Bluetooth Low Energy sync with physical glucose monitors for real-time health data.</div>
+            </div>
+            <div class="fcf">
+              <span class="fcf-icon">🏗</span>
+              <div class="fcf-title">Multi-variant Builds</div>
+              <div class="fcf-desc">Designed scalable build configurations for BeatO & MyDoc — same codebase, different environments.</div>
+            </div>
+            <div class="fcf">
+              <span class="fcf-icon">👨‍⚕️</span>
+              <div class="fcf-title">Doctor Modules</div>
+              <div class="fcf-desc">Built MyDoc's doctor-facing patient tracking, remote consultation, and chronic disease management flows.</div>
+            </div>
+            <div class="fcf">
+              <span class="fcf-icon">🔒</span>
+              <div class="fcf-title">Secure Data</div>
+              <div class="fcf-desc">Health data security — encrypted storage, secure API communication, performance optimised across variants.</div>
+            </div>
+            <div class="fcf">
+              <span class="fcf-icon">📊</span>
+              <div class="fcf-title">Health Insights</div>
+              <div class="fcf-desc">AI-driven glucose trends, personalised guidance, and remote expert consultations for diabetes management.</div>
+            </div>
+            <div class="fcf">
+              <span class="fcf-icon">🔔</span>
+              <div class="fcf-title">Smart Notifications</div>
+              <div class="fcf-desc">Firebase push notifications for glucose alerts, consultation reminders, and health milestones.</div>
+            </div>
+          </div>
+          <div class="fc-chips">
+            <span class="chip">Swift</span>
+            <span class="chip">UIKit</span>
+            <span class="chip">BLE / CoreBluetooth</span>
+            <span class="chip">Firebase</span>
+            <span class="chip">REST APIs</span>
+            <span class="chip">MVC / MVVM</span>
+            <span class="chip">Realm</span>
+            <span class="chip">Push Notifications</span>
+            <span class="chip">Xcode</span>
+            <span class="chip">CocoaPods</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER PROJECTS -->
+<section class="sec" style="padding-top:0;">
+  <div class="inn">
+    <p class="ey r">More work</p>
+    <h2 class="st r d1">Other apps I've shipped.</h2>
+    <div class="pgrid">
+
+      <div class="pc r">
+        <div class="ph c1">🚗</div>
+        <div class="pb2">
+          <p class="pt2">Ride-Hailing · Fluper</p>
+          <h3 class="pn2">Intlaq & Intlaq Captain</h3>
+          <p class="pd2">Ride-hailing app with captain-side panel. Google Maps routing, dynamic delivery popups, swipe-to-confirm UX.</p>
+          <div class="pchips"><span class="chip">Swift</span><span class="chip">Google Maps</span><span class="chip">Firebase</span></div>
+          <span class="pst live"><span class="std" style="background:var(--green)"></span>Live</span>
+        </div>
+      </div>
+
+      <div class="pc r d1">
+        <div class="ph c2">🏠</div>
+        <div class="pb2">
+          <p class="pt2">On-Demand · Fluper</p>
+          <h3 class="pn2">Jal, Fani & Goorek</h3>
+          <p class="pd2">Home service apps for maid booking, plumbing & painting. Full user panel, FSCalendar scheduling, Moyasare & Apple Pay.</p>
+          <div class="pchips"><span class="chip">Swift</span><span class="chip">FSCalendar</span><span class="chip">Apple Pay</span></div>
+          <span class="pst dev"><span class="std" style="background:var(--orange)"></span>In Development</span>
+        </div>
+      </div>
+
+      <div class="pc r d2">
+        <div class="ph c3">🛒</div>
+        <div class="pb2">
+          <p class="pt2">eCommerce</p>
+          <h3 class="pn2">Grofkit App</h3>
+          <p class="pd2">Dairy eCommerce — social logins, Razorpay payments, Google Places address autofill, cart/wishlist, skip-login browsing.</p>
+          <div class="pchips"><span class="chip">Swift</span><span class="chip">Razorpay</span><span class="chip">Firebase</span></div>
+          <span class="pst live"><span class="std" style="background:var(--green)"></span>Live</span>
+        </div>
+      </div>
+
+      <div class="pc r d1">
+        <div class="ph c4">😊</div>
+        <div class="pb2">
+          <p class="pt2">Wellness</p>
+          <h3 class="pn2">Goalsy App</h3>
+          <p class="pd2">Daily mood & emotion tracker — circular progress bars, pi charts, Firebase auth, social logins, $1 paywall for 60+ day history.</p>
+          <div class="pchips"><span class="chip">Swift</span><span class="chip">Charts</span><span class="chip">Firebase</span></div>
+          <span class="pst live"><span class="std" style="background:var(--green)"></span>Live</span>
+        </div>
+      </div>
+
+      <div class="pc r d2">
+        <div class="ph c5">🏥</div>
+        <div class="pb2">
+          <p class="pt2">Telemedicine</p>
+          <h3 class="pn2">Rapicue Patient App</h3>
+          <p class="pd2">Full telemedicine app — Agora video/audio doctor calls, ambulance booking, symptom scoring, Firebase chat, Razorpay. Built from scratch.</p>
+          <div class="pchips"><span class="chip">Agora</span><span class="chip">Firebase Chat</span><span class="chip">Razorpay</span></div>
+          <span class="pst dev"><span class="std" style="background:var(--orange)"></span>In Development</span>
+        </div>
+      </div>
+
+      <div class="pc r d3">
+        <div class="ph c6">📰</div>
+        <div class="pb2">
+          <p class="pt2">Government · News</p>
+          <h3 class="pn2">Northern Railways App</h3>
+          <p class="pd2">News app for Northern Railways employees — marquee headlines, filter by division/city/sentiment, pagination, zoom images.</p>
+          <div class="pchips"><span class="chip">Swift</span><span class="chip">UIKit</span><span class="chip">CollectionView</span></div>
+          <span class="pst live"><span class="std" style="background:var(--green)"></span>Internal Live</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY TIMELINE -->
+<section class="sec" id="journey">
+  <div class="inn">
+    <p class="ey r">My journey</p>
+    <h2 class="st r d1">3+ years of building.</h2>
+    <p class="sb r d2">From writing my first UITableView to leading full app delivery — here's how I got here.</p>
+
+    <div class="journey">
+
+      <!-- OrangeMantra — CURRENT -->
+      <div class="jitem r d1">
+        <div class="jdot-wrap"><div class="jdot active"></div></div>
+        <div class="jcard current">
+          <div class="j-header">
+            <div class="j-co-wrap">
+              <div class="j-logo" style="background:#fff;border-color:rgba(255,100,0,.25);padding:4px;">
+                <svg width="32" height="20" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                  <text x="0" y="30" font-family="Arial,sans-serif" font-size="22" font-weight="700">
+                    <tspan fill="#ff6600">orange</tspan><tspan fill="#333">mantra</tspan>
+                  </text>
+                </svg>
+              </div>
+              <div>
+                <div class="j-role">Associate iOS</div>
+                <div class="j-co" style="color:var(--orange);">OrangeMantra · Full-time</div>
+                <div style="font-size:11px;color:var(--dim);margin-top:2px;">📍 Gurugram, Haryana, India</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
+              <span class="current-badge">● Now</span>
+              <span class="j-date">Sep 2025 – Present · 9 mos</span>
+            </div>
+          </div>
+          <p class="j-desc">My current company. Embedded with the <strong style="color:var(--text);">BeatO client</strong> — building India's leading digital diabetes management platform used by millions. Working on BLE glucose sensor integration with physical health devices, multi-variant build configurations for BeatO & MyDoc, doctor-facing patient tracking modules, and real-time health data pipelines with secure encrypted storage.</p>
+          <div class="j-tags">
+            <span class="jtag">Swift</span><span class="jtag">UIKit</span><span class="jtag">BLE / CoreBluetooth</span>
+            <span class="jtag">Firebase</span><span class="jtag">Realm</span><span class="jtag">REST APIs</span>
+            <span class="jtag">MVC · MVVM</span><span class="jtag">Adobe XD</span><span class="jtag">Push Notifications</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fluper -->
+      <div class="jitem r d2">
+        <div class="jdot-wrap"><div class="jdot past"></div></div>
+        <div class="jcard">
+          <div class="j-header">
+            <div class="j-co-wrap">
+              <div class="j-logo" style="background:#d00;border-color:rgba(220,0,0,.3);display:flex;align-items:center;justify-content:center;">
+                <svg width="36" height="16" viewBox="0 0 90 26" xmlns="http://www.w3.org/2000/svg">
+                  <text x="0" y="22" font-family="Arial,sans-serif" font-size="22" font-weight="900" fill="#fff" letter-spacing="1">Fluper</text>
+                </svg>
+              </div>
+              <div>
+                <div class="j-role">Software Engineer (iOS)</div>
+                <div class="j-co" style="color:var(--blue);">Fluper · Full-time</div>
+                <div style="font-size:11px;color:var(--dim);margin-top:2px;">📍 Noida, Uttar Pradesh, India · On-site</div>
+              </div>
+            </div>
+            <span class="j-date">Jul 2024 – Sep 2025 · 1 yr 3 mos</span>
+          </div>
+          <p class="j-desc">Worked on ride-hailing apps (Intlaq, Intlaq Captain), on-demand home services (Jal, Fani, Goorek). Created full apps from scratch to App Store deployment. Mentored junior developers on UIKit best practices, architecture decisions, and debugging strategies.</p>
+          <div class="j-tags">
+            <span class="jtag">Swift</span><span class="jtag">UIKit</span><span class="jtag">Google Maps</span>
+            <span class="jtag">Alamofire</span><span class="jtag">FSCalendar</span><span class="jtag">Apple Pay</span><span class="jtag">Moyasare</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apponward — FIRST COMPANY -->
+      <div class="jitem r d3">
+        <div class="jdot-wrap"><div class="jdot past"></div></div>
+        <div class="jcard">
+          <div class="j-header">
+            <div class="j-co-wrap">
+              <div class="j-logo" style="padding:0;overflow:hidden;border:none;background:transparent;">
+                <svg width="52" height="52" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="bg1" cx="40%" cy="40%"><stop offset="0%" stop-color="#ff6a00"/><stop offset="100%" stop-color="#c0392b"/></radialGradient>
+                    <radialGradient id="bg2" cx="60%" cy="30%"><stop offset="0%" stop-color="#f7971e"/><stop offset="100%" stop-color="#ffd200"/></radialGradient>
+                    <radialGradient id="bg3" cx="70%" cy="70%"><stop offset="0%" stop-color="#56ccf2"/><stop offset="100%" stop-color="#2f80ed"/></radialGradient>
+                    <radialGradient id="bg4" cx="30%" cy="70%"><stop offset="0%" stop-color="#a18cd1"/><stop offset="100%" stop-color="#fbc2eb"/></radialGradient>
+                  </defs>
+                  <circle cx="50" cy="50" r="50" fill="url(#bg1)"/>
+                  <circle cx="65" cy="35" r="32" fill="url(#bg2)" opacity=".85"/>
+                  <circle cx="65" cy="65" r="28" fill="url(#bg3)" opacity=".8"/>
+                  <circle cx="35" cy="65" r="26" fill="url(#bg4)" opacity=".75"/>
+                  <!-- Play arrow -->
+                  <polygon points="38,28 38,72 76,50" fill="white" opacity=".92"/>
+                </svg>
+              </div>
+              <div>
+                <div class="j-role">Software Developer (iOS)</div>
+                <div class="j-co" style="color:var(--teal);">Apponward Technologies · Full-time</div>
+                <div style="font-size:11px;color:var(--dim);margin-top:2px;">📍 Noida, Uttar Pradesh, India</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
+              <span class="j-date" style="background:rgba(90,200,250,.07);border-color:rgba(90,200,250,.15);color:var(--teal);">First Company</span>
+              <span class="j-date">May 2022 – Jul 2024 · 2 yrs 3 mos</span>
+            </div>
+          </div>
+          <p class="j-desc">Where my career began. Built eCommerce, healthcare, wellness, and government apps from scratch — Grofkit, Goalsy, NomadicRoots, Northern Railways, Rapicue, Fittd, DailyModel, Delivery Partners. Learned full app lifecycle — architecture, UI, API integration, Firebase, payments, and App Store deployment.</p>
+          <div class="j-tags">
+            <span class="jtag">Swift</span><span class="jtag">UIKit</span><span class="jtag">Firebase</span>
+            <span class="jtag">Razorpay</span><span class="jtag">Stripe</span><span class="jtag">Agora</span>
+            <span class="jtag">Google Maps</span><span class="jtag">CocoaPods</span><span class="jtag">Bitbucket</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="sec" id="education" style="padding-top:0;">
+  <div class="inn">
+    <p class="ey r">Education</p>
+    <h2 class="st r d1">Academic background.</h2>
+
+    <!-- Degree cards row -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:2.5rem;">
+
+      <div class="jcard r" style="padding:1.8rem;border-radius:20px;background:rgba(191,90,242,.05);border-color:rgba(191,90,242,.15);border-top-color:rgba(191,90,242,.3);">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+          <div class="j-logo" style="background:linear-gradient(135deg,#12062a,#1a0a3a);border-color:rgba(191,90,242,.25);font-size:1.3rem;">🎓</div>
+          <div>
+            <div style="font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--purple);margin-bottom:2px;">B.Tech</div>
+            <div style="font-size:14px;font-weight:600;letter-spacing:-.01em;">Electronics & Communication Engineering</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--blue);font-weight:500;margin-bottom:3px;">JSS Academy of Technical Education</div>
+        <div style="font-size:12px;color:var(--dim);">📍 Noida, Uttar Pradesh · 2018 – 2022</div>
+      </div>
+
+      <div class="jcard r d1" style="padding:1.8rem;border-radius:20px;">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+          <div class="j-logo" style="font-size:1.3rem;">📗</div>
+          <div>
+            <div style="font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:2px;">12th</div>
+            <div style="font-size:14px;font-weight:600;letter-spacing:-.01em;">CBSE Board</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--blue);font-weight:500;margin-bottom:3px;">Delhi</div>
+        <div style="font-size:12px;color:var(--dim);">2017 – 2018</div>
+      </div>
+
+      <div class="jcard r d2" style="padding:1.8rem;border-radius:20px;">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+          <div class="j-logo" style="font-size:1.3rem;">📘</div>
+          <div>
+            <div style="font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:2px;">10th</div>
+            <div style="font-size:14px;font-weight:600;letter-spacing:-.01em;">CBSE Board</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--blue);font-weight:500;margin-bottom:3px;">Delhi</div>
+        <div style="font-size:12px;color:var(--dim);">2016 – 2017</div>
+      </div>
+
+    </div>
+
+    <!-- College Projects -->
+    <p class="ey r" style="margin-top:3.5rem;">During B.Tech</p>
+    <h3 class="r d1" style="font-size:1.5rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;">Academic projects.</h3>
+    <p class="sb r d2" style="font-size:14px;margin-bottom:2rem;">Hardware & IoT projects I built during my Electronics & Communication Engineering degree at JSS Academy.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;">
+
+      <div class="jcard r" style="padding:1.8rem;border-radius:20px;background:rgba(90,200,250,.04);border-color:rgba(90,200,250,.12);border-top-color:rgba(90,200,250,.25);">
+        <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem;">
+          <div style="font-size:1.6rem;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:rgba(90,200,250,.1);border:1px solid rgba(90,200,250,.2);border-radius:12px;">🕶️</div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);">2nd Year Project</div>
+        </div>
+        <div style="font-size:15px;font-weight:600;letter-spacing:-.02em;margin-bottom:.5rem;">Ultrasonic Glasses for Blind</div>
+        <div style="font-size:13px;color:var(--sub);line-height:1.7;">An assistive device for the visually challenged. The glasses use an ultrasonic sensor to detect upcoming obstacles and alert the user before a potential collision — improving safety and independence.</div>
+        <div class="j-tags" style="margin-top:.9rem;"><span class="jtag">Ultrasonic Sensor</span><span class="jtag">Hardware</span><span class="jtag">Embedded Systems</span></div>
+      </div>
+
+      <div class="jcard r d1" style="padding:1.8rem;border-radius:20px;background:rgba(191,90,242,.04);border-color:rgba(191,90,242,.12);border-top-color:rgba(191,90,242,.25);">
+        <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem;">
+          <div style="font-size:1.6rem;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:rgba(191,90,242,.1);border:1px solid rgba(191,90,242,.2);border-radius:12px;">🤖</div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--purple);">3rd Year Project</div>
+        </div>
+        <div style="font-size:15px;font-weight:600;letter-spacing:-.02em;margin-bottom:.5rem;">AI Controlled Robot</div>
+        <div style="font-size:13px;color:var(--sub);line-height:1.7;">An IoT-based project where an AI-controlled robot was built and navigated entirely using a voice-based AI device. The robot responded to voice commands for real-time movement control.</div>
+        <div class="j-tags" style="margin-top:.9rem;"><span class="jtag">IoT</span><span class="jtag">AI / Voice Control</span><span class="jtag">Robotics</span></div>
+      </div>
+
+      <div class="jcard r d2" style="padding:1.8rem;border-radius:20px;background:rgba(48,209,88,.04);border-color:rgba(48,209,88,.12);border-top-color:rgba(48,209,88,.25);">
+        <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem;">
+          <div style="font-size:1.6rem;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:rgba(48,209,88,.1);border:1px solid rgba(48,209,88,.2);border-radius:12px;">🚗</div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--green);">Final Year Project</div>
+        </div>
+        <div style="font-size:15px;font-weight:600;letter-spacing:-.02em;margin-bottom:.5rem;">Vehicle to Vehicle Communication using Li-Fi</div>
+        <div style="font-size:13px;color:var(--sub);line-height:1.7;">A final year project based on Li-Fi (Light Fidelity) technology — transmitting data between two vehicles using light instead of traditional radio waves, enabling faster and secure V2V communication.</div>
+        <div class="j-tags" style="margin-top:.9rem;"><span class="jtag">Li-Fi Technology</span><span class="jtag">V2V Communication</span><span class="jtag">Electronics</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec" id="skills" style="padding-top:0;">
+  <div class="inn">
+    <p class="ey r">Skills</p>
+    <h2 class="st r d1">What I work with.</h2>
+    <div class="sbento">
+      <div class="sbc wide r">
+        <span class="sbc-icon">📱</span>
+        <div class="sbc-title">iOS Development</div>
+        <div class="sbc-sub">Swift · UIKit · Xcode · CocoaPods · MVC · MVVM · CollectionView · TableView · XIBs · Auto Layout · Constraints</div>
+        <div class="stags">
+          <span class="jtag">Swift</span><span class="jtag">UIKit</span><span class="jtag">MVC</span><span class="jtag">MVVM</span><span class="jtag">Xcode</span><span class="jtag">CocoaPods</span>
+        </div>
+      </div>
+      <div class="sbc r d1">
+        <span class="sbc-icon">🔥</span>
+        <div class="sbc-title">Firebase</div>
+        <div class="sbc-sub">Phone Auth, Google/Facebook/Apple Login, Push Notifications, Realtime DB, Chat</div>
+      </div>
+      <div class="sbc r d1">
+        <span class="sbc-icon">📡</span>
+        <div class="sbc-title">BLE & Hardware</div>
+        <div class="sbc-sub">CoreBluetooth — connecting iOS apps to glucose monitors & physical health devices</div>
+      </div>
+      <div class="sbc r d2">
+        <span class="sbc-icon">🗺</span>
+        <div class="sbc-title">Maps & Location</div>
+        <div class="sbc-sub">Google Maps SDK · Google Places · Core Location · Route tracking</div>
+      </div>
+      <div class="sbc r d2">
+        <span class="sbc-icon">💳</span>
+        <div class="sbc-title">Payments</div>
+        <div class="sbc-sub">Razorpay · Stripe · Apple Pay · Moyasare payment gateway</div>
+      </div>
+      <div class="sbc r d3">
+        <span class="sbc-icon">🎬</span>
+        <div class="sbc-title">Media & Calls</div>
+        <div class="sbc-sub">AVKit · AVFoundation · Agora Video Call · Agora Audio Call</div>
+      </div>
+      <div class="sbc r d3">
+        <span class="sbc-icon">💾</span>
+        <div class="sbc-title">Storage</div>
+        <div class="sbc-sub">Realm · CoreData · UserDefaults · Keychain</div>
+      </div>
+      <div class="sbc r d4">
+        <span class="sbc-icon">🛠</span>
+        <div class="sbc-title">Tools</div>
+        <div class="sbc-sub">Postman · Bitbucket · GitLab · Adobe XD · Figma</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact" style="padding-bottom:6rem;">
+  <div class="inn" style="text-align:center;">
+    <p class="ey r">Get in touch</p>
+    <h2 class="st r d1">Let's build something.</h2>
+    <div class="cbox r d2">
+      <div class="cshine"></div>
+      <div class="cglow"></div>
+      <!-- <p class="cn">iOS Engineer · Open to roles, freelance & collaborations</p> -->
+      <a href="mailto:abhi.ec792@gmail.com" class="ce">abhi.ec792@gmail.com</a>
+      <a href="tel:+918882317448" class="cph">+91 88823 17448</a>
+      <div class="csocs">
+        <a href="https://www.linkedin.com/in/abhishek-kumar-9709151b8" target="_blank" class="csoc">LinkedIn ↗</a>
+        <a href="https://github.com/Abhishekumar07" class="csoc">GitHub ↗</a>
+        <a href="#" class="csoc">Download Resume ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="fcopy">© 2026 Abhishek Kumar · iOS Engineer · Delhi</span>
+  <span class="fcopy" style="color:var(--dim);">Currently building · BeatO at OrangeMantra</span>
+</footer>
+
+<script>
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.08});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+
+function count(el){
+  const t=parseFloat(el.dataset.t),s=el.dataset.s||'',d=parseInt(el.dataset.d||0);
+  const dur=1700,st=performance.now();
+  const tick=now=>{
+    const p=Math.min((now-st)/dur,1),ease=1-Math.pow(1-p,3),v=t*ease;
+    el.textContent=(d?v.toFixed(d):Math.round(v))+s;
+    if(p<1)requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+const co=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){count(e.target);co.unobserve(e.target);}});},{threshold:.5});
+document.querySelectorAll('[data-t]').forEach(el=>co.observe(el));
+
+const ng=document.getElementById('ng');
+window.addEventListener('scroll',()=>{
+  ng.style.background=window.scrollY>50?'rgba(0,0,0,.85)':'rgba(3,3,10,.68)';
+},{passive:true});
+</script>
+</body>
+</html>
